@@ -1,8 +1,8 @@
-#1/bin/bash
+#!/bin/bash
 
 FAN="/proc/acpi/ibm/fan"
 
-if [[ -f "$FAN" ]]; then
+if [[ ! -f "$FAN" ]]; then
     echo "Fan control intercace not found: $FAN"
     exit
 fi
@@ -19,5 +19,9 @@ full)
     ;;
 status | "")
     cat $FAN
+    ;;
+*)
+    echo "Usage $0 {status|auto|full|0-7}"
+    exit 1
     ;;
 esac
